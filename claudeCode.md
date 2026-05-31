@@ -1,822 +1,809 @@
-# 🤖 AI Learning Course — Living Document
+# Claude Code — Complete Developer Course
 
-> **Maintained by:** [Your Name]
-> **Last Updated:** 2026-06-01
-> **Source Format:** YouTube Courses, Articles, Documentation
-> **Format:** Markdown (Git-compatible, evolving document)
+> **Source:** [Complete Claude Code Course In 2 Hours For Developers](https://www.youtube.com/watch?v=TAKDIvvUdc4)  
+> **Instructor:** Krish Naik (1.43M subscribers)  
+> **Duration:** 1 hour 58 minutes | **Published:** May 25, 2026  
+> **Document Version:** 1.0 | **Last Updated:** June 2026  
+> **Prerequisites:** Basic Python knowledge  
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-1. [Claude Code](#1-claude-code)
-2. [Terminal & CLI Basics](#2-terminal--cli-basics)
-3. [IDEs & Development Environments](#3-ides--development-environments)
-4. [Antigravity IDE](#4-antigravity-ide)
-5. [CLAUDE.md — The Project Brain](#5-claudemd--the-project-brain)
-6. [Advanced Claude Code Features](#6-advanced-claude-code-features)
-7. [Context Management & Token Efficiency](#7-context-management--token-efficiency)
-8. [Model Context Protocol (MCP)](#8-model-context-protocol-mcp)
-9. [Skills in Claude Code](#9-skills-in-claude-code)
-10. [Sub-Agents & Agent Orchestration](#10-sub-agents--agent-orchestration)
+1. [Overview](#1-overview)
+2. [Key Concepts](#2-key-concepts)
+3. [Terminology](#3-terminology)
+4. [Claude Ecosystem](#4-claude-ecosystem)
+5. [Claude Code Installation & Integration](#5-claude-code-installation--integration)
+6. [The Agentic Loop](#6-the-agentic-loop)
+7. [Building with Claude Code](#7-building-with-claude-code)
+8. [CLAUDE.md — Memory & Context Files](#8-claudemd--memory--context-files)
+9. [Agents and Sub-Agents](#9-agents-and-sub-agents)
+10. [Agent Views](#10-agent-views)
 11. [Agent Teams](#11-agent-teams)
-12. [Git Worktrees for Parallel AI Work](#12-git-worktrees-for-parallel-ai-work)
-13. [Cloud Deployment with Modal](#13-cloud-deployment-with-modal)
-14. [Building & Selling AI Products](#14-building--selling-ai-products)
+12. [Claude Skills](#12-claude-skills)
+13. [Claude Plugins](#13-claude-plugins)
+14. [Common Doubts](#14-common-doubts)
+15. [Interview Questions & Answers](#15-interview-questions--answers)
+16. [Industry Usage](#16-industry-usage)
+17. [Related Topics](#17-related-topics)
+18. [Revision Notes](#18-revision-notes)
 
 ---
 
-## Sources Log
+## 1. Overview
 
-| # | Title | Author | Platform | Date Added | Topics Covered |
-|---|-------|---------|----------|------------|----------------|
-| 1 | CLAUDE CODE FULL COURSE 4 HOURS: Build & Sell (2026) | Nick Saraev | YouTube | 2026-06-01 | Claude Code, Antigravity, MCP, Sub-Agents, Git Worktrees, Modal, Context Management, Skills, Agent Teams |
+Claude Code is an **agentic AI coding tool** built by Anthropic that reads your entire codebase, edits files, runs commands, and integrates with your development tools. It is available in your **terminal, IDE, desktop app, and browser**.
 
----
+Unlike simple code-completion tools (like basic Copilot autocomplete), Claude Code operates in an **agentic loop** — it plans, acts, observes the result, and iterates until the task is complete. It understands your entire project context and can manage files, fix bugs, build features, and even spawn autonomous sub-agents to work in parallel.
 
----
+This course targets developers who want to use Claude Code productively in real projects, aligned with the **Claude Certified Architect** certification curriculum.
 
-# 1. Claude Code
-
-## Overview
-
-**Claude Code** is an AI-powered coding assistant made by Anthropic (the company behind Claude). Unlike simple chatbots, Claude Code works directly inside your development environment (your coding workspace) and can read, write, edit, and run code on your behalf. Think of it like having a very smart programming partner who can actually reach into your project and make changes — not just suggest them in a chat box.
-
-In Nick Saraev's 2026 course, Claude Code is positioned as the central tool for building full applications, automating workflows, and running complex multi-agent pipelines — all without needing deep programming experience.
+**What you will learn:**
+- Setting up Claude Code in your development environment
+- Using Claude Code to understand and work inside existing codebases
+- Building autonomous agents and sub-agents
+- Running agent teams that communicate with each other
+- Creating reusable skills and installing third-party plugins
+- Using Plan Mode, Auto Mode, and Accept-Edit mode effectively
 
 ---
 
-## Key Concepts
+## 2. Key Concepts
 
-### 1.1 What Claude Code Actually Does
+### 2.1 Agentic Coding Tool
 
-Claude Code operates as an **agentic AI assistant**. This means it does not just answer questions — it takes *actions*. When you give Claude Code a task like "build me a website with a contact form," it will:
+A traditional AI assistant waits for a single prompt and returns a single answer. Claude Code is **agentic** — it breaks down a complex task into smaller sub-tasks, takes actions (read files, write code, run terminal commands), observes the outcome, and continues iterating until the goal is accomplished.
 
-1. Create files and folders in your project
-2. Write all the necessary code
-3. Run tests or preview servers if needed
-4. Iterate and fix errors it encounters
+**Analogy:** Think of a regular AI as a calculator — you give it an input, it gives you an output. Claude Code is more like a junior developer who sits next to you: you give it a task, it opens your codebase, starts working, runs the app to test it, fixes the error, and comes back to you when done.
 
-This is fundamentally different from tools like ChatGPT where you copy-paste code yourself. Claude Code acts autonomously within defined boundaries.
+### 2.2 The Agentic Loop
 
-### 1.2 Claude Code vs. Traditional Coding
+The agentic loop is the core engine that powers Claude Code. It consists of three repeating stages:
 
-| Feature | Traditional Coding | Claude Code |
-|---|---|---|
-| Who writes the code | You (human) | Claude (AI) + You (directing) |
-| Speed | Hours/days | Minutes |
-| Knowledge required | Deep programming skill | High-level instruction skill |
-| Error handling | Manual debugging | AI self-corrects |
-| Scalability | Limited by your time | Parallelized with agents |
+```
+[Read / Understand Context] → [Plan & Execute Action] → [Observe Result & Iterate]
+```
 
-### 1.3 How Claude Code Fits Into a Workflow
+- **Stage 1 — Context Gathering:** Claude reads files, folder structures, configs, and relevant documentation.
+- **Stage 2 — Action Execution:** Claude writes code, modifies files, runs terminal commands, calls APIs, etc.
+- **Stage 3 — Observation & Iteration:** Claude checks the result (e.g., runs the code, reads error messages) and loops back to Stage 1 if the task is not complete.
 
-A typical Claude Code workflow looks like this:
+The loop continues **unless and until the task is resolved**. For example, if there is a bug, Claude will keep retrying until the bug is fixed.
 
-1. **You open your IDE** (e.g., Antigravity or VS Code)
-2. **You start a Claude Code session** in the terminal or GUI
-3. **You write instructions** in plain English (or with technical detail)
-4. **Claude builds, edits, or debugs** your project
-5. **You verify the output**, request changes, and iterate
+### 2.3 Plan Mode vs Auto Mode vs Accept-Edit Mode
 
-### 1.4 The "Agentic Loop"
+These are the three operating modes you can switch between using `Shift+Tab` inside Claude Code:
 
-Claude Code works in what's called an **agentic loop** — a cycle where it:
-- **Observes** the current state of your project (reads files, sees errors)
-- **Plans** what to do (decides which files to edit)
-- **Acts** (writes/changes code)
-- **Verifies** (checks if the result is correct)
-- **Repeats** until the task is done
+| Mode | Description | Best Used For |
+|------|-------------|---------------|
+| **Plan Mode** | Claude first creates a detailed plan/blueprint of what it will do, then waits for your approval before executing | Complex tasks; risky changes; large refactors |
+| **Auto Mode** | Claude executes tasks automatically without stopping for confirmation at each step | Trusted tasks; rapid prototyping |
+| **Accept-Edit Mode** | Claude asks for your explicit confirmation before applying each file edit | Code reviews; cautious production work |
 
-This is why it's called "agentic" — it has *agency*, meaning it can make decisions and take multiple steps on its own.
+**Plan Mode internally spawns a separate sub-agent** that creates the plan as an independent Claude instance running in the background — it is not just a text description, but an actual agentic process.
+
+### 2.4 Context Window
+
+The **context window** is the maximum amount of text (code, instructions, conversation) that Claude can hold in "working memory" at one time.
+
+- **Claude Opus 4.7** — 1 million token context window (default in Claude Code)
+- **Claude Sonnet 4.6** — Smaller but faster; switchable within settings
+
+A large context window means Claude can understand your entire large codebase at once, rather than just a few files.
+
+### 2.5 Memory Scopes
+
+Claude Code has three memory levels that determine where instructions and agent configurations are stored:
+
+| Scope | Location | Visible To |
+|-------|----------|------------|
+| **Project Scope** | Inside the project folder | Everyone working on that project |
+| **User Scope** | Tied to the current OS user account | Only the current user, across all projects |
+| **Local Scope** | The local desktop/machine | The specific machine being used |
+
+### 2.6 CLAUDE.md (Cloud.mmd) File
+
+The `CLAUDE.md` file (shown as `cloud.mmd` in the course) is a **special Markdown file placed at the root of your project**. Claude Code automatically loads this file into its context at the start of every conversation in that project.
+
+You use it to give Claude persistent instructions about your project — its architecture, coding conventions, what libraries to use, what not to touch, etc. Use `/init` to auto-generate it from an existing codebase.
 
 ---
 
-## Terminology
+## 3. Terminology
 
 | Term | Definition |
 |------|------------|
-| **Claude Code** | Anthropic's AI coding agent that works inside your development environment |
-| **Anthropic** | The AI safety company that created Claude |
-| **Agentic AI** | AI that takes autonomous, multi-step actions to complete tasks |
-| **Agentic Loop** | The repeating cycle of observe → plan → act → verify |
-| **Prompt** | The instruction or request you give to Claude |
-| **Context Window** | The maximum amount of text/code Claude can "see" at one time |
-| **Token** | The basic unit Claude uses to read/write text (roughly ¾ of a word) |
-| **Session** | One continuous conversation/working period with Claude Code |
+| **`> claude`** | Terminal command to launch Claude Code in the current directory |
+| **Agentic Loop** | The iterative cycle of: gather context → take action → observe result → repeat |
+| **Plan Mode** | An operating mode where Claude creates an execution plan before acting |
+| **Auto Mode** | Claude acts fully autonomously without requesting confirmation |
+| **Accept-Edit Mode** | Claude asks for permission before each file modification |
+| **Sub-Agent** | A separate Claude instance spawned to handle a specific sub-task independently |
+| **Agent View** | A live terminal panel showing the real-time status of all running agents |
+| **Agent Team** | A collaborative group of Claude agents that share a task list and communicate with each other |
+| **Skill** | A reusable collection of instructions, resources, and examples that teaches Claude how to perform a specific type of task |
+| **Plugin** | A third-party package integration that provides additional tools, resources, or capabilities to Claude Code via a standard interface |
+| **CLAUDE.md** | A Markdown file loaded into every project conversation as persistent context |
+| **`/init`** | Slash command that auto-generates a `CLAUDE.md` for your current project |
+| **`/plugins`** | Slash command to browse the installed and available plugins marketplace |
+| **MCP Server** | Model Context Protocol server — a standardized way to connect external tools and data sources to Claude |
+| **Context Window** | Maximum amount of text Claude can process at one time (1M tokens for Opus 4.7) |
+| **Plan.mmd File** | A Mermaid diagram file auto-generated by Claude to document the architecture or execution plan |
+| **Claude Opus 4.7** | The most capable Claude model with a 1M token context window (default for Claude Code) |
+| **Claude Sonnet 4.6** | A faster, lighter Claude model switchable from settings |
+| **Exa Search** | A third-party web search plugin that can be integrated into Claude Code |
+| **Context7** | A plugin that provides up-to-date open-source library documentation to Claude |
 
 ---
 
-## Examples
+## 4. Claude Ecosystem
 
-**Example 1: Building a web app in under 15 minutes**
+### 4.1 The Three Main Products
 
-Nick demonstrates in the course: you can open Claude Code in Antigravity, type "build me a landing page for a freelance photography business with a contact form and pricing section," and Claude will create an entire working web app in minutes — complete with HTML, CSS, and JavaScript.
+Anthropic's product ecosystem around Claude consists of three primary tools relevant to developers:
 
-**Example 2: Debugging**
+**Claude.ai (Web App)**
+- The conversational web interface (chat.claude.ai)
+- Great for analysis, writing, explaining concepts, and Excel-like tasks
+- Has Projects, Live Artifacts, and Contexts
+- "Personal assistant for doing multiple tasks" — good for running a company, writing, research
 
-If a page isn't loading correctly, you describe the problem to Claude Code: "The submit button doesn't work on mobile." Claude reads your code, identifies the issue, and fixes it — without you touching any code.
+**Claude Desktop App**
+- Downloadable desktop application
+- Allows you to select a local folder and give instructions
+- Coding happens inside the app interface
+- Less recommended for developers — the terminal/IDE approach gives more visibility
 
-**Example 3: Email Classification App**
+**Claude Code (Terminal / IDE Tool)**
+- The main focus of this course
+- CLI tool: just type `claude` in any terminal to start
+- Available in: terminal, IDE (VS Code extension), desktop app, browser
+- For developers: terminal + IDE is the recommended approach because you see all the actions being taken
 
-One full project in the course is building a Gmail classifier — an app that reads your emails and labels them into categories automatically. This is done entirely with Claude Code in an afternoon.
+### 4.2 Integrations Available in the Ecosystem
 
----
+Claude can be integrated across different surfaces:
+- **Chrome browser** — as a browser extension
+- **Slack** — as a workspace app/extension
+- **GitHub** — via plugin for PR reviews, issue management
+- **VS Code / Cursor** — IDE extension
+- **Custom scripts** — via the Claude API
 
-## Common Doubts
+### 4.3 Models Available in Claude Code
 
-**Q: Do I need to know how to code to use Claude Code?**
-A: No — but knowing *some* basics helps you verify that what Claude built is correct. The course teaches you how to "verify" outputs even without deep coding knowledge. You give instructions in English, Claude writes the code.
+| Model | Context Window | Best For |
+|-------|---------------|---------|
+| Claude Opus 4.7 | 1,000,000 tokens | Deep codebase understanding, complex tasks (default) |
+| Claude Sonnet 4.6 | Smaller | Faster responses, lighter tasks |
 
-**Q: Is Claude Code the same as GitHub Copilot or Cursor?**
-A: They're similar in concept but different in power. Copilot is a code *suggester* (autocompletes lines). Cursor is more agentic but still tied to one file. Claude Code is fully agentic — it can manage your whole project, run commands, and work across many files at once.
-
-**Q: Will Claude Code break my existing code?**
-A: It can make mistakes. That's why the course emphasizes **verification** (checking every output) and **Git** (version control — so you can always roll back changes).
-
-**Q: Is it expensive to run?**
-A: Claude Code uses tokens, which cost money. The course dedicates a whole section to **token management** to help you minimize costs.
-
----
-
-## Interview Questions
-
-**Q1: What is Claude Code and how does it differ from a traditional AI chatbot?**
-> Claude Code is an agentic AI coding assistant. Unlike chatbots that respond in conversation, Claude Code takes autonomous multi-step actions inside your development environment — reading, writing, editing, and running code on your behalf.
-
-**Q2: What does "agentic" mean in the context of AI?**
-> Agentic AI systems can make sequential decisions and take actions to complete longer-horizon tasks without requiring step-by-step human guidance. They observe context, plan, act, and verify in a loop.
-
-**Q3: What is a token in AI systems?**
-> A token is the basic unit of text that language models process. One token ≈ 3-4 characters or ¾ of an English word. Costs and context limits are measured in tokens.
-
-**Q4: Why is context window size important for Claude Code?**
-> The context window limits how much code/instructions Claude can "see" at once. If your project is too large, Claude may lose track of earlier instructions. This is why context management strategies (like CLAUDE.md and Skills) are critical.
+You can switch models from Claude Code's settings at any time.
 
 ---
 
-## Industry Usage
+## 5. Claude Code Installation & Integration
 
-- **Freelancers** use Claude Code to build client websites and automation tools in hours instead of days
-- **Startup founders** prototype products without a full engineering team
-- **Content agencies** automate content pipelines (e.g., Nick's own 7-figure 1SecondCopy business)
-- **Developers** use it to parallelize work — running multiple Claude Code instances simultaneously on different features
+### 5.1 Platform Support
 
----
+| Platform | Installation Method |
+|----------|---------------------|
+| macOS / Linux / WSL | `npm install -g @anthropic-ai/claude-code` |
+| Windows PowerShell | PowerShell install command from docs |
+| Windows CMD | `curl`-based install command from docs |
 
-## Related Topics
+Always check the [official docs](https://docs.anthropic.com/claude-code) for the latest install command for your OS.
 
-- [CLAUDE.md — The Project Brain](#5-claudemd--the-project-brain)
-- [Context Management & Token Efficiency](#7-context-management--token-efficiency)
-- [Sub-Agents & Agent Orchestration](#10-sub-agents--agent-orchestration)
-- [Git Worktrees for Parallel AI Work](#12-git-worktrees-for-parallel-ai-work)
+### 5.2 Pricing
 
----
+Claude Code is available under the following plans:
+- **Pro Plan** — ~$20/month — gives access to Claude Code
+- **Pro Max Plans** — higher usage limits and access to more powerful models
 
-## Revision Notes
-
-- Claude Code = AI that writes code AND takes actions in your project
-- Works via an agentic loop: observe → plan → act → verify
-- No deep coding knowledge needed, but verification skills are important
-- Costs are measured in tokens — always monitor token usage
-- Works best inside an IDE (Antigravity recommended in this course)
-
----
-
----
-
-# 2. Terminal & CLI Basics
-
-## Overview
-
-The **terminal** (also called command line, CLI, or shell) is a text-based interface for controlling your computer. Instead of clicking buttons and icons, you type commands. Claude Code is launched and runs primarily through the terminal, so understanding basic terminal concepts is essential.
-
----
-
-## Key Concepts
-
-### 2.1 Terminal vs. Graphical User Interface (GUI)
-
-- A **GUI** (Graphical User Interface) is what most people are familiar with: windows, icons, mouse clicks. Examples: Finder on Mac, Windows Explorer.
-- A **Terminal** (or CLI — Command Line Interface) is text-only. You type commands, press Enter, and the computer responds with text output.
-
-**Why does it matter for Claude Code?**
-Claude Code runs as a terminal application. When you start a Claude Code session, you type commands in the terminal. This is where you instruct Claude, see its progress, and review outputs.
-
-### 2.2 Key Terminal Concepts
-
-| Concept | Explanation |
-|---------|-------------|
-| **Directory** | A folder. `cd foldername` moves you into it |
-| **File Path** | The address of a file, e.g., `/home/user/project/app.py` |
-| **Command** | An instruction you type, e.g., `ls` to list files |
-| **Shell** | The program that interprets your terminal commands (e.g., bash, zsh) |
-| **Environment Variable** | Hidden settings stored on your system, like API keys |
-| **Process** | A running program |
-
-### 2.3 Essential Terminal Commands for Claude Code Users
+### 5.3 Starting Claude Code
 
 ```bash
-cd foldername      # Navigate into a folder
-cd ..              # Go up one level
-ls                 # List files in current directory
-pwd                # Show current directory path
-mkdir foldername   # Create a new folder
-cat filename.txt   # Print file contents
-claude             # Start a Claude Code session
+# Navigate to your project folder
+cd my-project
+
+# Start Claude Code
+claude
 ```
 
----
+When you first run `claude` in a folder, it will ask: **"Do you trust this folder?"** — type `yes` to allow it to read and write files in that directory.
 
-## Terminology
+### 5.4 Integrating with VS Code (IDE)
 
-| Term | Definition |
-|------|------------|
-| **CLI** | Command Line Interface — text-based computer control |
-| **Terminal** | The window/app where you type CLI commands |
-| **Shell** | The language interpreter for terminal commands (bash, zsh, fish) |
-| **stdin/stdout** | Standard input (keyboard) / standard output (screen text) |
-| **Environment Variable** | Key-value pair stored in the OS, often used for secrets like API keys |
+1. Install the Claude Code VS Code extension from the marketplace
+2. Open a project in VS Code
+3. Claude Code appears as a panel in the sidebar
+4. The same agentic loop works directly from within the IDE
 
----
+### 5.5 Understanding a New Codebase (Real-World Scenario)
 
-## Common Doubts
+One of the most powerful use cases: **joining a new company or project**. Instead of spending days reading documentation:
 
-**Q: Is the terminal the same on Mac, Windows, and Linux?**
-A: Similar but not identical. Mac/Linux use Unix-based shells (bash/zsh). Windows has Command Prompt and PowerShell. For Claude Code, Mac and Linux are most natively supported; Windows users often use WSL (Windows Subsystem for Linux).
+```
+> claude "analyze this project and tell me about its architecture, 
+  the main modules, and how they connect"
+```
 
-**Q: Do I need to memorize all terminal commands?**
-A: No. You only need a handful to navigate and run Claude Code. Claude itself can also write and run terminal commands on your behalf.
+Claude will scan every folder and file, create an internal agentic loop, and give you a structured summary. You can then ask follow-up questions like "what does the authentication module do?" or "how does the data flow from the API to the database?"
 
 ---
 
-## Interview Questions
+## 6. The Agentic Loop
 
-**Q1: What is the difference between a terminal and an IDE?**
-> A terminal is a text-based interface for running commands on your operating system. An IDE (Integrated Development Environment) is a graphical application that provides code editing, syntax highlighting, file management, and often an embedded terminal — all in one place.
+### 6.1 How It Works Step by Step
 
-**Q2: What is an environment variable and why is it used for API keys?**
-> An environment variable is a named value stored at the OS level, accessible by programs. API keys are stored as environment variables rather than hardcoded in files to prevent accidental exposure (e.g., in public Git repos).
+```
+User gives a task
+       ↓
+Claude reads the project context (files, folders, configs)
+       ↓
+Claude creates an internal plan
+       ↓
+Claude executes the first action (writes code / runs command)
+       ↓
+Claude reads the output / error
+       ↓
+If task NOT complete → loop back to plan step
+If task COMPLETE → return result to user
+```
 
----
+### 6.2 What Triggers Each Stage
 
-## Industry Usage
+- **Context-gathering only:** Simple questions about the codebase (e.g., "what does this file do?")
+- **Full loop:** Bug fixes, feature implementations, refactoring
+- **Repeated loop:** Complex bugs where Claude keeps trying different approaches until the bug is resolved
 
-Every software developer uses the terminal daily. For AI workflows with Claude Code, you'll use the terminal to: launch sessions, manage files, run scripts, set environment variables, and deploy to cloud services.
+### 6.3 Adapting to Task Type
 
----
+The agentic loop **adapts dynamically** to the complexity of what you ask:
+- A simple question might only need Stage 1 (context gathering)
+- A bug fix cycles through all three stages repeatedly
+- A new feature build might run dozens of iterations
 
-## Related Topics
+### 6.4 Running in a Sandbox
 
-- [IDEs & Development Environments](#3-ides--development-environments)
-- [Claude Code](#1-claude-code)
-- [Git Worktrees for Parallel AI Work](#12-git-worktrees-for-parallel-ai-work)
-
----
-
-## Revision Notes
-
-- Terminal = text-based computer control
-- GUI = graphical (icons, mouse); CLI = text (commands, keyboard)
-- Claude Code is launched from the terminal
-- Key commands: `cd`, `ls`, `pwd`, `mkdir`
-- API keys are stored as environment variables for security
-
----
-
----
-
-# 3. IDEs & Development Environments
-
-## Overview
-
-An **IDE (Integrated Development Environment)** is a software application that provides everything a developer needs in one place: a code editor, file browser, terminal, and often AI assistance. This is your "workbench" when building projects with Claude Code.
+Claude Code can execute scripts in a sandboxed environment to test its own code changes — if an error occurs, it automatically feeds that error back into the loop and continues fixing.
 
 ---
 
-## Key Concepts
+## 7. Building with Claude Code
 
-### 3.1 What Is an IDE?
+### 7.1 Slash Commands (Built-in Commands)
 
-An IDE bundles together:
-- **Code Editor**: Where you write and view code (with syntax coloring)
-- **File Explorer**: Shows the structure of your project
-- **Terminal**: An embedded command line
-- **Extensions/Plugins**: Add-ons for extra features (Git, linters, AI)
-- **Debugger**: Tools to find and fix errors
+Slash commands are special instructions that trigger built-in behaviors:
 
-### 3.2 Visual Studio Code (VS Code)
+| Command | What It Does |
+|---------|-------------|
+| `/init` | Scans the current project and auto-generates a `CLAUDE.md` file with project context |
+| `/plugins` | Opens the plugin marketplace to browse, install, or manage plugins |
+| `Shift+Tab` | Cycles between Plan Mode, Auto Mode, and Accept-Edit Mode |
 
-**VS Code** is the most popular free IDE in the world, made by Microsoft. Key features:
+### 7.2 Creating a Plan File (plan.mmd)
 
-- Extremely extensible via extensions
-- Has a built-in terminal
-- Works with every programming language
-- Free and open source
-- Used in the Claude Code course as a reference
+When building something complex, instruct Claude to first write a plan:
 
-### 3.3 Why the IDE Choice Matters for Claude Code
+```
+> "Before you start coding, write down your entire execution plan 
+  as a Mermaid diagram in a file called plan.mmd"
+```
 
-Claude Code works within your IDE's file system. A well-configured IDE makes it easier to:
-- See changes Claude makes in real-time
-- Preview running applications
-- Manage multiple project files
-- Review diffs (what changed) before accepting
+This creates a visual architecture diagram that:
+- Serves as documentation for the team
+- Gives Claude a reference to follow as it builds
+- Can be committed to the repository as living documentation
 
----
+### 7.3 Real Example — Building from Scratch vs. Joining Existing
 
-## Terminology
+**Joining an existing project (most common in industry):**
+```
+> "I just joined this team. Analyze the entire codebase and give 
+  me a summary of: 1) the main components, 2) the tech stack, 
+  3) how data flows from the API to the database"
+```
 
-| Term | Definition |
-|------|------------|
-| **IDE** | Integrated Development Environment — all-in-one coding workspace |
-| **VS Code** | Visual Studio Code, the most popular free IDE (made by Microsoft) |
-| **Extension** | A plugin that adds features to your IDE |
-| **Syntax Highlighting** | Color-coding code by type (keywords, strings, variables) |
-| **Linter** | A tool that checks your code for errors and style issues |
-| **Diff** | A comparison showing what changed between two versions of a file |
+**Implementing a new feature:**
+```
+> "Add a user authentication module using JWT tokens. 
+  Follow the existing patterns in the codebase."
+```
 
----
+**Fixing a bug:**
+```
+> "The login function throws a 500 error when the email contains 
+  a '+' character. Find and fix it."
+```
 
-## Common Doubts
+Claude will then loop through reading the relevant files, writing the fix, testing it, and reporting back.
 
-**Q: Can I use Claude Code without an IDE?**
-A: Yes — Claude Code runs in the terminal and works on plain project folders. But an IDE makes your workflow dramatically smoother, especially for reviewing Claude's changes.
+### 7.4 Projects Feature (Context Management)
 
-**Q: Should I use VS Code or Antigravity?**
-A: For beginners, the course recommends **Antigravity** because it's designed specifically for AI-assisted coding. VS Code is more powerful for traditional developers. Both work with Claude Code.
-
----
-
-## Interview Questions
-
-**Q1: What is the difference between a text editor and an IDE?**
-> A text editor (like Notepad) only edits text. An IDE adds features like debugging, version control integration, terminal access, intelligent code completion, and project management — making it a complete development platform.
+In Claude Code / Claude.ai, you can create **Projects** that preserve context across conversations. This is useful for:
+- Ongoing software development where context must persist
+- Team projects where everyone needs the same Claude context
+- Long-term codebases where you don't want to re-explain architecture every session
 
 ---
 
-## Related Topics
+## 8. CLAUDE.md — Memory & Context Files
 
-- [Antigravity IDE](#4-antigravity-ide)
-- [Claude Code](#1-claude-code)
+### 8.1 What Is CLAUDE.md?
 
----
+`CLAUDE.md` is a special Markdown file placed in the **root of your project folder**. Every time you start a new Claude Code conversation in that folder, Claude automatically loads this file first.
 
-## Revision Notes
+Think of it as **persistent memory for Claude about your project** — you write it once and Claude "remembers" your project conventions every time.
 
-- IDE = all-in-one coding workspace
-- VS Code = most popular free IDE; great for general development
-- Antigravity = AI-native IDE recommended in this course
-- IDEs include: editor, file browser, terminal, debugger, extensions
-- Claude Code works in the terminal *within* your IDE
-
----
-
----
-
-# 4. Antigravity IDE
-
-## Overview
-
-**Antigravity** (also called "Antigravity IDE") is an AI-native development environment specifically designed for working with AI coding assistants like Claude Code. It is Nick Saraev's recommended IDE for this course. Unlike VS Code (which was designed for human coders and later got AI features), Antigravity is built from the ground up to make AI-assisted development smooth and visual.
-
-> **Note from Nick (pinned comment):** Antigravity updated its interface after the course was filmed. To match what's shown in the course, install **"Antigravity IDE"** specifically.
-
----
-
-## Key Concepts
-
-### 4.1 What Makes Antigravity Different
-
-- **AI-first design**: Every panel and feature is oriented around AI assistance
-- **Visual project browser**: Easier for beginners to see what Claude is doing
-- **Integrated Claude Code**: Launch and monitor Claude sessions directly
-- **Preview panel**: See your web app update in real-time as Claude codes
-- **Tight Git integration**: Review Claude's changes before committing
-
-### 4.2 Getting Started with Antigravity
-
-Steps covered in the course:
-1. Download and install Antigravity IDE
-2. Open or create a project folder
-3. Set up your Anthropic API key as an environment variable
-4. Launch a Claude Code session within Antigravity
-5. Start giving instructions in natural language
-
-### 4.3 Building Your First App
-
-The course demonstrates building a complete web app in under 15 minutes:
-1. Open a new project in Antigravity
-2. Tell Claude: "Build a web app for [purpose] with [features]"
-3. Claude writes all the code
-4. Preview it in the built-in browser panel
-5. Iterate: "Make the button red" / "Add a login form"
-
----
-
-## Terminology
-
-| Term | Definition |
-|------|------------|
-| **Antigravity** | AI-native IDE optimized for Claude Code and AI-assisted coding |
-| **Antigravity IDE** | The specific version to install (post-update to match course) |
-| **Preview Panel** | Live browser preview of your web app inside the IDE |
-| **Project Folder** | The directory that contains all your project files |
-
----
-
-## Common Doubts
-
-**Q: Is Antigravity free?**
-A: As of the course date (Feb 2026), there is a free tier. Check the current pricing on the Antigravity website.
-
-**Q: What if Antigravity looks different from the course?**
-A: Install "Antigravity IDE" (the specific version) to match the course interface, as noted in Nick's pinned comment.
-
----
-
-## Industry Usage
-
-AI-native IDEs like Antigravity represent the cutting edge of developer tooling in 2026. They are used by indie developers, freelancers, and small product teams that want to maximize AI leverage.
-
----
-
-## Related Topics
-
-- [IDEs & Development Environments](#3-ides--development-environments)
-- [Claude Code](#1-claude-code)
-- [CLAUDE.md — The Project Brain](#5-claudemd--the-project-brain)
-
----
-
-## Revision Notes
-
-- Antigravity = AI-first IDE, built for Claude Code workflows
-- Recommended over VS Code for beginners in this course
-- Install "Antigravity IDE" for the version shown in the course
-- Provides: live preview, integrated Claude, visual file browser, Git diff viewer
-- First app can be built in under 15 minutes using Antigravity + Claude Code
-
----
-
----
-
-# 5. CLAUDE.md — The Project Brain
-
-## Overview
-
-**CLAUDE.md** is a special file you place at the root of your project folder. It acts as the **"project brain"** — a persistent memory document that Claude Code reads at the start of every session. Since Claude doesn't remember previous sessions by default (it has no persistent memory), CLAUDE.md is how you give it the context it needs: what your project is, how it's structured, what conventions to follow, and what tools to use.
-
-Think of it like a briefing document you hand to a new contractor before they start working.
-
----
-
-## Key Concepts
-
-### 5.1 Why CLAUDE.md Is Essential
-
-Without CLAUDE.md, every time you start a new Claude Code session, Claude starts "fresh" — it doesn't know:
-- What your project does
-- How your files are organized
-- What coding style you prefer
-- What APIs and tools are connected
-- What has already been built
-
-With CLAUDE.md, Claude reads this file first and becomes immediately context-aware, saving you from re-explaining everything each session.
-
-### 5.2 What Goes in CLAUDE.md
-
-A well-written CLAUDE.md typically includes:
+### 8.2 What to Put in CLAUDE.md
 
 ```markdown
-# Project: [Your Project Name]
+# Project: MyApp
 
-## Purpose
-Brief description of what this project does.
-
-## Tech Stack
-- Frontend: React, Tailwind CSS
-- Backend: Python, FastAPI
-- Database: PostgreSQL
-- Deployment: Modal
-
-## File Structure
-/src         - Frontend code
-/api         - Backend API routes
-/scripts     - Utility scripts
+## Architecture
+- Frontend: React + TypeScript
+- Backend: FastAPI (Python)
+- Database: PostgreSQL with SQLAlchemy ORM
+- Auth: JWT tokens via python-jose
 
 ## Coding Conventions
-- Use 2 spaces for indentation
-- Always write comments for non-obvious logic
-- Function names should be descriptive verbs
+- Use snake_case for Python variables and functions
+- Use camelCase for JavaScript/TypeScript
+- Always add docstrings to Python functions
+- Never commit .env files
 
-## Important Rules
-- Never delete files without asking
-- Always run tests before committing
-- Use environment variables for all API keys
+## Do NOT modify
+- /legacy folder (old client code, keep intact)
+- database/migrations (always generate new migrations, never edit old ones)
 
-## Current Status
-- [x] User authentication complete
-- [ ] Payment integration in progress
-- [ ] Email notifications pending
+## Key Files
+- main.py — FastAPI app entry point
+- config.py — All environment-based configuration
 ```
 
-### 5.3 CLAUDE.md as a Living Document
+### 8.3 How to Generate CLAUDE.md Automatically
 
-CLAUDE.md should be **updated as your project grows**. When Claude builds a new feature, add it to the project status. When you establish a new convention, add it to the rules. Over time, CLAUDE.md becomes a comprehensive spec for your entire project.
+```bash
+# Inside Claude Code, type:
+/init
+```
 
-### 5.4 The `.claude` Directory
+Claude scans your entire project and creates an appropriate `CLAUDE.md` for you. You can then edit it to add additional constraints or remove irrelevant sections.
 
-Related to CLAUDE.md is the `.claude` directory (hidden folder). This is where Claude Code stores:
-- **Slash command definitions** (custom shortcuts)
-- **Hook configurations** (automatic actions on events)
-- **Plugin settings**
-- **Skills** (reusable task templates)
+### 8.4 Memory Scope Locations
 
----
-
-## Terminology
-
-| Term | Definition |
-|------|------------|
-| **CLAUDE.md** | A project-level Markdown file that acts as Claude Code's persistent memory |
-| **.claude directory** | Hidden folder where Claude stores hooks, commands, skills, and configs |
-| **Project Brain** | Nickname for CLAUDE.md — the persistent context document |
-| **Tech Stack** | The collection of technologies used in a project |
-| **Convention** | An agreed-upon rule or style standard for how code is written |
-
----
-
-## Examples
-
-**Example: E-commerce project CLAUDE.md excerpt**
-
-```markdown
-# Project: ShopBot
-
-## Purpose
-An automated e-commerce store that processes orders and sends confirmation emails.
-
-## Rules
-- All database writes must be wrapped in try/catch blocks
-- Never hardcode prices — always fetch from the database
-- Email confirmations use the Resend API (key in .env as RESEND_API_KEY)
-
-## Current Known Issues
-- Checkout sometimes times out on slow connections (investigating)
+```
+/project-root/CLAUDE.md        → Project scope (everyone on the project sees this)
+~/.claude/CLAUDE.md            → User scope (applies to all projects for this OS user)
+/local-machine/CLAUDE.md       → Local scope (applies only on this machine)
 ```
 
 ---
 
-## Common Doubts
+## 9. Agents and Sub-Agents
 
-**Q: Does Claude actually read CLAUDE.md every time?**
-A: Yes — Claude Code is configured to load CLAUDE.md at the start of each session. This is one of the most important conventions to set up properly.
+### 9.1 What Is a Sub-Agent?
 
-**Q: Should CLAUDE.md be committed to Git?**
-A: Generally yes, so the whole team benefits. But omit sensitive details — API keys should always be in `.env` files (which are in `.gitignore`), never in CLAUDE.md.
+A **sub-agent** is a separate, independent Claude Code instance that is spawned by the main Claude session to handle a specific task. Each sub-agent:
+- Has its **own isolated context window**
+- Executes its task independently from the parent
+- Returns a **single summary result** back to the caller when done
+- Operates in parallel with other sub-agents
 
-**Q: Can I have multiple CLAUDE.md files?**
-A: Yes — you can place them in subdirectories for specific components, and Claude will read the appropriate one based on context.
+**Key difference from Agent Teams:** Sub-agents do NOT communicate with each other. They are like workers in separate rooms who hand their finished work back to a coordinator.
 
----
+### 9.2 Built-In Sub-Agents (Examples)
 
-## Interview Questions
+When you press `Shift+Tab` in Claude Code, you can see built-in sub-agent modes:
 
-**Q1: What is CLAUDE.md and why is it important?**
-> CLAUDE.md is a Markdown file at the project root that provides Claude Code with persistent context about the project. Since Claude has no cross-session memory, this file acts as a briefing document — covering project purpose, tech stack, conventions, and status. Without it, Claude starts "blank" every session.
+| Agent | Role |
+|-------|------|
+| **Edit Mode** | Focuses on applying file edits |
+| **Plan Mode** | Runs as a planner sub-agent to create a structured execution plan |
 
-**Q2: How does CLAUDE.md relate to the concept of "context" in AI?**
-> Context is the information an AI has available when processing a request. CLAUDE.md front-loads critical project context so Claude doesn't waste tokens re-discovering the project structure. It's a form of "long-term memory injection" into a stateless AI system.
+### 9.3 Creating a Custom Agent
 
----
+In Claude Code, you can create named custom agents. During agent creation, you configure:
 
-## Industry Usage
+1. **Agent Name** — e.g., `code-improvement-advisor`
+2. **Description** — What this agent does
+3. **Tools Available** — Which tools the agent can use (file read/write, terminal, web search, etc.)
+4. **Model** — Which Claude model to use (Opus 4.7, Sonnet 4.6, or inherit from parent)
+5. **Background Color** — Visual identifier in the Agent View
+6. **Memory Scope** — Where the agent's configuration is stored (Project / User / Local)
 
-- Large engineering teams maintain detailed CLAUDE.md files as a form of AI onboarding documentation
-- Solo developers use CLAUDE.md to stay consistent across days/weeks of development
-- The CLAUDE.md pattern is becoming a standard convention across AI coding tools
+**Example agent created in the course:** `code-improvement-advisor` — scans a codebase and suggests code quality improvements.
 
----
+### 9.4 Running Agents
 
-## Related Topics
+```bash
+# Start a specific named agent
+claude --agent code-improvement-advisor
 
-- [Claude Code](#1-claude-code)
-- [Context Management & Token Efficiency](#7-context-management--token-efficiency)
-- [Skills in Claude Code](#9-skills-in-claude-code)
-
----
-
-## Revision Notes
-
-- CLAUDE.md = persistent project memory for Claude
-- Placed at project root; read by Claude at session start
-- Contains: project purpose, tech stack, file structure, rules, current status
-- The `.claude/` directory stores hooks, commands, plugins, skills
-- Update CLAUDE.md as the project evolves — it's a living document
-- **Never** put API keys or secrets in CLAUDE.md
-
----
-
----
-
-# 6. Advanced Claude Code Features
-
-## Overview
-
-Beyond basic prompting, Claude Code has a rich set of advanced features that dramatically increase productivity: **Hooks**, **Slash Commands**, **Plugins**, and integration with external services. The course dedicates a significant portion to these features (starting around the 54-minute mark).
-
----
-
-## Key Concepts
-
-### 6.1 Hooks
-
-**Hooks** are automatic actions that run when specific events happen in Claude Code. Think of them as "triggers."
-
-Examples:
-- **Pre-commit hook**: Before Claude commits code to Git, automatically run tests
-- **Post-edit hook**: After Claude edits a file, automatically format the code
-- **Error hook**: When Claude encounters an error, automatically notify you via a specific message format
-
-Hooks are defined in the `.claude/` directory and help automate repetitive safeguards.
-
-### 6.2 Slash Commands
-
-**Slash commands** are custom shortcuts you define to give Claude quick, reusable instructions.
-
-Example slash commands:
-- `/deploy` → Triggers a standard deployment process
-- `/test` → Runs the test suite and reports results
-- `/summarize` → Creates a summary of recent changes
-- `/refactor [filename]` → Refactors a specific file to match conventions
-
-You define them in `.claude/commands/` as Markdown files.
-
-```markdown
-# /deploy
-
-Run the following steps in order:
-1. Run all tests (abort if any fail)
-2. Build the production bundle
-3. Deploy to Modal
-4. Send a Slack notification with the deployment URL
+# Or reference the agent in a task:
+> "Run the code-improvement-advisor agent on the /api folder"
 ```
 
-### 6.3 Plugins
+Agents run in the background. You can manage and observe them through **Agent Views**.
 
-**Plugins** in Claude Code (introduced around 3:09 in the course) extend Claude's capabilities by connecting it to external tools and APIs. Plugins are similar to "tools" in agent frameworks — they give Claude new abilities beyond code editing.
+### 9.5 Sub-Agents vs Agent Teams — Key Comparison
 
-Examples:
-- **Gmail plugin**: Claude can read and label your emails
-- **GitHub plugin**: Claude can create issues, manage PRs
-- **Notion plugin**: Claude can update your project notes
-- **Web search plugin**: Claude can look up information online
+| Feature | Sub-Agents | Agent Teams |
+|---------|-----------|-------------|
+| Communication | None (isolated) | Peer-to-peer communication |
+| Context | Own isolated context window | Shared context + task list |
+| Coordination | Return results to caller only | Can claim tasks, collaborate, coordinate |
+| Use Case | Independent parallel tasks | Complex collaborative workflows |
+| Task Visibility | Private | Shared visible task list |
 
-### 6.4 The .claude Directory Structure
+---
+
+## 10. Agent Views
+
+### 10.1 What Is Agent View?
+
+Agent View is a **live monitoring panel in Claude Code** that shows all currently running agents in real time. You can see:
+- Which agents are active
+- What task each agent is currently working on
+- Status of each agent (running / completed / error)
+- Logs of what each agent has done
+
+### 10.2 Why It Matters
+
+Without Agent View, running multiple background agents is like having employees working in separate rooms with no visibility. Agent View is your **real-time dashboard** for multi-agent workflows.
+
+### 10.3 Practical Use Case
+
+You have three agents running in parallel:
+1. Agent A — analyzing the authentication module
+2. Agent B — reviewing the database schema
+3. Agent C — checking the API endpoints for security issues
+
+Agent View shows all three simultaneously in your terminal so you can monitor progress without switching between multiple terminal windows.
+
+### 10.4 How It Works Technically
+
+- All agents run as **independent Claude Code processes**
+- They appear as separate entries in the Agent View panel
+- You can run multiple agents **from a single terminal instance** using Agent View
+- Each agent has its own context window and memory
+
+---
+
+## 11. Agent Teams
+
+### 11.1 What Is an Agent Team?
+
+An **Agent Team** is a group of Claude agents that:
+- Share a **centralized, visible task list**
+- **Communicate with each other** peer-to-peer
+- Claim tasks from the shared list when available
+- Send their findings back to teammates and the team lead
+- Coordinate to solve a complex problem collaboratively
+
+### 11.2 Architecture of an Agent Team
 
 ```
-.claude/
-├── commands/        # Slash command definitions
-│   ├── deploy.md
-│   └── test.md
-├── hooks/           # Event-triggered automations
-│   ├── pre_commit.sh
-│   └── post_edit.sh
-├── skills/          # Reusable task templates (see Skills section)
-└── settings.json    # Global Claude Code configuration
+[Main Agent / Team Lead]
+         |
+    [Shared Task List]
+    - Task 1
+    - Task 2  
+    - Task 3
+         |
+   ┌─────┴─────┐
+[Agent A]   [Agent B]
+   Claims     Claims
+   Task 1     Task 2
+      \         /
+       Communicate
+       findings
+          ↓
+   [Team Lead consolidates]
+          ↓
+   [Final result to user]
+```
+
+### 11.3 Step-by-Step Flow
+
+1. You give Claude a complex task (e.g., "review this entire codebase for RAG implementation quality")
+2. The main agent breaks it into sub-tasks and creates a **shared task list**
+3. Claude **spawns N teammate agents** (number depends on the task)
+4. Each teammate **claims a task** from the shared list
+5. Teammates **work in parallel** and communicate findings to each other
+6. Once all tasks are complete, the team lead **consolidates the results**
+7. When done, the team gracefully shuts down (teammates confirm shutdown and terminate)
+
+### 11.4 Collaborative Team Structure Benefits
+
+- **Shared context and visibility** — all agents see the same task list
+- **Peer-to-peer communication** — agents can share findings and build on each other's work
+- **Better coordination** — agents don't duplicate effort
+- **Higher quality output** — combined output often exceeds what a single agent could produce
+
+### 11.5 Real Example from the Course
+
+```
+Task: "Review the codebase for RAG implementation and page indexing"
+Team created:
+  - Teammate 1: Reviews page indexing flow
+  - Teammate 2: Reviews RAG implementation quality
+
+Both teammates work in parallel, communicate findings, mark tasks complete, 
+send consolidated findings to the team lead.
+Result: "3 small clarity fixes. Correct page index flow. No duplicated code."
+Team gracefully shuts down after both teammates confirm completion.
 ```
 
 ---
 
-## Terminology
+## 12. Claude Skills
 
-| Term | Definition |
-|------|------------|
-| **Hook** | An automatic action triggered by a specific event in Claude Code |
-| **Slash Command** | A `/keyword` shortcut for a complex, reusable instruction |
-| **Plugin** | An extension that gives Claude Code access to external tools/services |
-| **.claude directory** | Hidden folder where all Claude Code configurations live |
-| **Pre/Post Hook** | Hooks that run before or after a specific action |
+### 12.1 What Is a Skill?
 
----
+A **Skill** is a reusable collection of instructions, resources, and examples that **teaches Claude Code how to complete a specific type of task**. Once saved, you can invoke the skill by name without re-explaining everything each time.
 
-## Common Doubts
+**Analogy:** Think of a skill as a **macro or template** for Claude. If you always need Claude to generate API documentation in a specific format, you create a skill for it once and reuse it across projects.
 
-**Q: Are hooks like webhooks?**
-A: Conceptually similar but different in scope. Webhooks are triggered by external HTTP events (from other services). Claude Code hooks are triggered by local events within your Claude Code session (like editing a file or committing code).
+### 12.2 When to Use Skills
 
-**Q: Do I need to know bash to write hooks?**
-A: Basic hooks can be simple shell scripts. Claude Code can actually help you write them — just describe what you want the hook to do.
+Skills are useful when:
+- You perform the same type of task repeatedly (e.g., "explain this PR", "add docstrings to this module", "generate a changelog")
+- You want to standardize how Claude does something across your team
+- You want Claude to remember a complex workflow without re-prompting every time
 
----
+### 12.3 Creating a Skill
 
-## Interview Questions
+When you create a skill, Claude:
+1. Creates a `skill.md` file in a dedicated skills folder
+2. Populates it with the instructions, resources, and examples you provided
+3. Registers it so you can invoke it by name
 
-**Q1: What are hooks in the context of Claude Code?**
-> Hooks are event-triggered automations in Claude Code. They run automatically when specific events occur (e.g., pre-commit, post-file-edit). They're used to enforce quality gates, run tests, format code, and automate repetitive processes.
+**Example: Open-Source Documentation Skill**
+```
+Skill name: open-source-documentation
+Description: Uses Context7 plugin to fetch and summarize 
+             the latest docs for any open-source library
 
-**Q2: What is the purpose of slash commands?**
-> Slash commands are custom keyboard shortcuts that trigger complex, multi-step instructions. Instead of typing a long prompt each time, you define `/command` once and reuse it, making workflows faster and more consistent.
+Usage: "open-source documentation for [library name]"
+```
 
----
+### 12.4 Invoking a Skill
 
-## Industry Usage
+```bash
+# In Claude Code, type:
+> "open-source documentation for FastAPI"
 
-- Teams use hooks to enforce coding standards and run tests automatically
-- Slash commands standardize common workflows across team members
-- Plugins connect Claude Code to business tools (Gmail, Slack, Notion, GitHub)
+# Claude automatically runs the skill steps using Context7 plugin
+# to fetch the latest FastAPI docs and return a structured summary
+```
 
----
+### 12.5 Saving Skills at Different Scopes
 
-## Related Topics
-
-- [CLAUDE.md — The Project Brain](#5-claudemd--the-project-brain)
-- [Model Context Protocol (MCP)](#8-model-context-protocol-mcp)
-- [Skills in Claude Code](#9-skills-in-claude-code)
-
----
-
-## Revision Notes
-
-- **Hooks** = automatic triggers (pre/post events)
-- **Slash Commands** = `/keyword` shortcuts for reusable instructions
-- **Plugins** = extensions connecting Claude to external services
-- All configured in the `.claude/` directory
-- Hooks enforce quality; commands increase speed; plugins expand reach
+| Scope | Where Saved | When to Use |
+|-------|-------------|-------------|
+| Project | `/project-root/.claude/skills/` | Skills specific to one project |
+| User | `~/.claude/skills/` | Personal skills used across all projects |
+| Local | Local machine config | Machine-specific skills |
 
 ---
 
----
+## 13. Claude Plugins
 
-# 7. Context Management & Token Efficiency
+### 13.1 What Is a Plugin?
 
-## Overview
+A **plugin** is a package integration that provides additional **tools, resources, or capabilities** to Claude Code through a standard interface. Plugins connect Claude to third-party services and data sources.
 
-**Context** is everything Claude can "see" during a session — your instructions, project files, conversation history, and any tool outputs. **Tokens** are the unit of measurement for this context. Managing context and tokens efficiently is one of the most important skills for working with Claude Code at scale, and the course dedicates a full section to it (starting ~2:13:53).
+**Analogy:** If Claude Code is a smartphone, plugins are like apps you install from an App Store.
 
----
+### 13.2 Why Use Plugins?
 
-## Key Concepts
+Claude Code on its own has strong code reasoning, but many tasks require external data:
+- Web search (Claude doesn't have live internet access by default)
+- Up-to-date library documentation
+- GitHub PR access
+- Database connections
+- Cloud services
 
-### 7.1 What Is the Context Window?
+Plugins fill these gaps.
 
-The context window is the maximum amount of text Claude can process at once. Think of it like working memory — Claude can only "think about" what's currently in the window.
+### 13.3 Plugin Marketplace
 
-- Claude 3 models have context windows ranging from **200K to 1M+ tokens**
-- 1 token ≈ ¾ of an English word, or ~4 characters
-- A 200K token window ≈ roughly 150,000 words ≈ a short novel
+Access the plugin marketplace inside Claude Code:
+```bash
+/plugins
+# → discover, install, manage plugins
+```
 
-**Why it matters:** If your codebase is huge or your session is long, older parts of the conversation "fall off" the context window, causing Claude to lose track of earlier instructions.
+### 13.4 Key Plugins Covered in the Course
 
-### 7.2 Token Costs
+**Exa Search**
+- Provides **real-time web search** capabilities to Claude Code
+- Use case: "Find the latest breaking changes in Next.js 15"
+- Installation: `claude install exa` (paste the install command from the plugin page)
+- Requires: An Exa API secret key (set in plugin configuration)
 
-Every token costs money. Claude Code is billed by:
-- **Input tokens**: What you send to Claude (your prompts, files, history)
-- **Output tokens**: What Claude generates (code, explanations, etc.)
+**Context7**
+- Provides **live, up-to-date open-source library documentation**
+- Solves the problem: Claude's training data has a cutoff date — library docs change fast
+- Use case: "What is the correct API for `useEffect` in React 19?"
+- How it works: Fetches docs directly from the official source at query time
 
-Output tokens are typically more expensive than input tokens.
+### 13.5 Installing a Plugin
 
-### 7.3 Strategies for Token Management
+```bash
+# Method 1: via /plugins marketplace in Claude Code
+/plugins → discover → install
 
-The course (2:27:23) covers these strategies:
+# Method 2: via terminal command
+claude install <plugin-name>
 
-**1. CLAUDE.md for persistent context** (avoids re-explaining every session)
+# After installation, configure API keys if required
+# Then verify: /plugins → see installed list
+```
 
-**2. Compact summaries** — Instead of keeping full conversation history, periodically ask Claude to summarize the session so far, then start fresh with that summary.
+### 13.6 MCP Server Integration
 
-**3. File-based context** — Rather than pasting huge files into the chat, tell Claude to `read file.py` — this is more efficient than including the full file in your prompt.
+Plugins communicate with Claude via the **Model Context Protocol (MCP)**. MCP is Anthropic's standardized interface for connecting external tools and data sources to Claude models.
 
-**4. Skills** — Pre-written task templates that avoid long prompt explanations (see Skills section)
-
-**5. Scoped tasks** — Break large tasks into smaller pieces. Instead of "Build the whole app," do "Build the login system first."
-
-**6. Use /compact or /clear commands** — Reset context when you start a new task.
-
-### 7.4 Understanding Token "Burn Rate"
-
-The course teaches how to monitor your token usage:
-- Track tokens per task
-- Identify expensive operations (large file reads, long explanations)
-- Use tools/MCPs that are token-efficient
-
----
-
-## Terminology
-
-| Term | Definition |
-|------|------------|
-| **Context Window** | The maximum text Claude can process in one session |
-| **Token** | The basic unit of AI text processing (~¾ of a word) |
-| **Input Tokens** | Tokens you send to Claude (your prompts, files) |
-| **Output Tokens** | Tokens Claude generates (code, text responses) |
-| **Context Management** | Strategies to maximize useful context while minimizing cost |
-| **Token Burn Rate** | How quickly you're consuming tokens in a session |
-| **/compact** | A Claude Code command to compress context history |
+- Each plugin essentially wraps an external service as an MCP server
+- Claude Code can query any MCP-compatible server
+- You can see available MCP servers in the integrations section of Claude Code settings
 
 ---
 
-## Common Doubts
+## 14. Common Doubts
 
-**Q: What happens when Claude "runs out" of context?**
-A: The oldest parts of the conversation are dropped. Claud
+**Q: What is the difference between Claude.ai and Claude Code?**  
+A: Claude.ai is the web chat interface — you type questions and get text answers. Claude Code is a developer tool that runs in your terminal and IDE. Claude Code can actually *read your files*, *run terminal commands*, *edit code*, and *spawn sub-agents* — it takes real actions in your project, not just chat.
+
+**Q: Do I need to be an expert to use Claude Code?**  
+A: No. The course requires only basic Python knowledge. Claude Code is designed to help developers at all levels — you give it natural language instructions and it handles the technical details.
+
+**Q: Why use Plan Mode instead of just Auto Mode?**  
+A: Auto Mode is fast but risky for critical tasks. Plan Mode makes Claude show you *exactly what it's going to do* before doing it. Always use Plan Mode when: working on production code, doing large refactors, or when mistakes would be expensive to undo.
+
+**Q: What's the difference between a sub-agent and an agent team?**  
+A: Sub-agents are isolated — they work alone and only report back to the parent. They have no visibility into each other. Agent Teams share a task list and communicate with each other peer-to-peer, like real team members collaborating. Agent Teams produce better results for complex tasks because agents can build on each other's findings.
+
+**Q: What is a skill vs a plugin?**  
+A: A **skill** is something you teach Claude *how to do* — a reusable set of instructions for a task (like a macro). A **plugin** is a connection to an *external service* that gives Claude new *capabilities* (like web search or live docs). Skills are Claude-internal; plugins are external integrations.
+
+**Q: What is CLAUDE.md and why is it important?**  
+A: `CLAUDE.md` is Claude's persistent memory for your project. Without it, Claude has no memory between conversations — you'd have to re-explain your project architecture every time. With `CLAUDE.md`, all project context is automatically loaded at the start of every session, making Claude immediately productive.
+
+**Q: What is the agentic loop and why does it matter?**  
+A: The agentic loop is what separates Claude Code from simple chatbots. It means Claude doesn't just answer once — it plans, acts, observes the result, and keeps iterating until the task is done. This is how Claude can fix multi-file bugs and build complete features autonomously.
+
+**Q: Does Claude Code need internet access to work?**  
+A: Claude Code itself works offline for local code tasks. However, certain features — like the Exa Search plugin (web search) or Context7 (live docs) — require internet access. The AI model itself runs on Anthropic's cloud, so you need an internet connection to use Claude Code at all.
+
+**Q: Can I use Claude Code for free?**  
+A: The base Claude Pro plan (~$20/month) gives access to Claude Code. Higher usage limits require Max plans. There is no fully free tier for Claude Code at the time of the course.
+
+**Q: What does "context window" mean in practice?**  
+A: The context window is how much your project Claude can "see" at once. With Opus 4.7's 1 million token window, Claude can hold roughly 750,000 words in context — meaning it can analyze even very large codebases in a single session without losing earlier context.
+
+---
+
+## 15. Interview Questions & Answers
+
+**Q1: What is Claude Code and how is it different from other AI coding tools?**  
+A: Claude Code is an agentic coding assistant by Anthropic that operates via a continuous loop — it reads files, writes code, runs commands, and iterates until a task is complete. Unlike copilot-style autocomplete tools that suggest the next line of code, Claude Code understands the entire project context and takes multi-step autonomous actions.
+
+**Q2: Explain the agentic loop in Claude Code.**  
+A: The agentic loop has three stages: (1) Context Gathering — Claude reads relevant files, folders, and configurations; (2) Action Execution — Claude writes code, modifies files, or runs commands; (3) Observation & Iteration — Claude checks the output and loops back until the task is resolved. For bug fixes, this can mean Claude tries multiple approaches until the bug is gone.
+
+**Q3: What is the difference between Plan Mode and Auto Mode?**  
+A: Plan Mode runs a background sub-agent to create a detailed execution plan before taking any action — it shows you the plan and waits for approval. Auto Mode executes tasks immediately without confirmation. Plan Mode is safer for production code; Auto Mode is faster for trusted development tasks.
+
+**Q4: What are sub-agents and when would you use them?**  
+A: Sub-agents are independent Claude instances spawned to handle specific sub-tasks. Each has its own isolated context window and runs in parallel. You use sub-agents when tasks can be divided and executed independently — for example, analyzing three different modules of a codebase simultaneously.
+
+**Q5: How do Agent Teams differ from Sub-Agents?**  
+A: Agent Teams are collaborative — they share a visible task list and communicate peer-to-peer. Sub-agents are isolated — they have no awareness of each other and only report back to the parent. Agent Teams are better for complex tasks requiring coordination; sub-agents are better for independent parallel work.
+
+**Q6: What is CLAUDE.md and what goes in it?**  
+A: `CLAUDE.md` is a Markdown file in the project root that Claude automatically loads at the start of every conversation. It contains persistent project context: architecture overview, coding conventions, tech stack details, files not to touch, and key configuration. It's generated via `/init` and acts as Claude's long-term memory for the project.
+
+**Q7: What is the Model Context Protocol (MCP)?**  
+A: MCP (Model Context Protocol) is Anthropic's standardized interface for connecting external tools, data sources, and services to Claude models. Plugins in Claude Code are essentially MCP servers. It allows Claude to access web search, GitHub, databases, and other third-party capabilities in a structured, safe way.
+
+**Q8: What is a Claude Skill and how do you create one?**  
+A: A skill is a reusable set of instructions and examples that teaches Claude how to perform a specific task. Once created, it is saved as a `.md` file and can be invoked by name. Skills are scoped to project, user, or local level. You create a skill by describing the task and workflow to Claude, which generates the skill file automatically.
+
+**Q9: What memory scopes does Claude Code support?**  
+A: Three scopes: (1) Project scope — stored in the project folder, visible to everyone on the team; (2) User scope — tied to the OS user account, applies across all projects for that user; (3) Local scope — applies only on the current machine, not synced.
+
+**Q10: How does Claude Code handle context across large codebases?**  
+A: Claude Opus 4.7, the default model for Claude Code, has a 1 million token context window — enough to load very large codebases. The CLAUDE.md file provides persistent architectural context. The agentic loop's context-gathering phase reads only the relevant files for each task, keeping context focused and efficient.
+
+---
+
+## 16. Industry Usage
+
+**Onboarding New Developers**  
+Companies use Claude Code to help new engineers understand existing codebases in hours instead of days. A developer can ask "analyze this entire project and explain the architecture" and get an immediate, comprehensive overview.
+
+**Automated Code Review**  
+Agent teams are deployed to review pull requests: one agent checks for security vulnerabilities, another checks for code style, a third checks for test coverage — all running in parallel and reporting a consolidated review.
+
+**Bug Hunting at Scale**  
+The agentic loop's ability to iteratively try fixes makes it powerful for complex, multi-file bugs that would take a human developer hours to track down.
+
+**Feature Development Acceleration**  
+Using Plan Mode + Auto Mode together, teams prototype new features rapidly. The developer describes the feature in natural language, Claude generates a plan, and after approval, implements it across multiple files.
+
+**Documentation Generation**  
+Skills like "generate API documentation" or "write a changelog" are created once and reused across all projects, standardizing documentation quality.
+
+**Live Library Documentation (Context7 Plugin)**  
+Since Claude's training data has a cutoff, the Context7 plugin ensures Claude always uses the *current* version of library documentation — critical when working with rapidly evolving frameworks.
+
+---
+
+## 17. Related Topics
+
+These are the concepts and topics you should study next after completing this course:
+
+- **Deep Agents / Autonomous Agents** — The instructor's next course covers how to build agents like Claude Code from scratch (using LangChain, LangGraph, or similar frameworks)
+- **Model Context Protocol (MCP)** — Deep dive into how MCP works and how to build your own MCP servers
+- **RAG (Retrieval-Augmented Generation)** — Understanding how retrieval is used to extend LLM context beyond the context window
+- **LangChain / LangGraph** — Popular Python frameworks for building agentic workflows
+- **OpenAI Agents SDK** — Alternative agentic SDK to compare with Claude's approach
+- **Anthropic API** — Direct API access to Claude models for building custom applications
+- **Vector Databases** — Pinecone, ChromaDB, Weaviate — used in conjunction with RAG and agents
+- **FastMCP** — Framework for building MCP servers (mentioned in comments as having major updates in version 3.0)
+- **Claude Certified Architect Exam** — Certification that validates deep knowledge of Claude Code concepts covered in this course
+
+---
+
+## 18. Revision Notes
+
+**Core Concept**
+- Claude Code = agentic AI coding tool (terminal + IDE + desktop + browser)
+- Not just code completion — it *reads, writes, runs, iterates*
+
+**The Agentic Loop**
+- Read context → Execute action → Observe result → Repeat until done
+- Adapts depth based on task complexity
+
+**Modes (Shift+Tab to cycle)**
+- Plan Mode → makes a plan first, waits for approval
+- Auto Mode → fully autonomous
+- Accept-Edit Mode → asks per file change
+
+**Memory**
+- CLAUDE.md = project persistent memory (auto-loaded every session)
+- `/init` generates it automatically from your codebase
+- 3 scopes: Project → User → Local
+
+**Models**
+- Default: Claude Opus 4.7 (1M token context)
+- Alternative: Claude Sonnet 4.6 (faster, smaller)
+
+**Agents**
+- Sub-agents = isolated, parallel, no inter-communication, own context window
+- Agent Teams = collaborative, shared task list, peer-to-peer communication
+- Agent View = live monitoring dashboard for all running agents
+
+**Skills vs Plugins**
+- Skill = reusable instruction set (teaches Claude *how* to do something)
+- Plugin = external service integration (gives Claude new *capabilities*)
+- Key plugins: Exa Search (web), Context7 (live docs)
+- Plugin interface = MCP (Model Context Protocol)
+
+**Key Slash Commands**
+- `/init` — generate CLAUDE.md
+- `/plugins` — browse plugin marketplace
+
+**Pricing**
+- Claude Pro plan (~$20/month) = access to Claude Code
+- Higher usage → Max plans
+
+**Real-World Tips**
+- Always use Plan Mode for production code changes
+- Create CLAUDE.md for every serious project
+- Use Agent Teams for complex multi-part code reviews
+- Use Context7 plugin when working with evolving libraries
+- Python knowledge is enough to get started
